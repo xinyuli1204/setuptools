@@ -242,12 +242,10 @@ def find_vcvarsall(version):
     that fails it falls back to the VS90COMNTOOLS env var.
     """
     vsbase = VS_BASE % version
-    productdir = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build"
+    productdir = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Enterprise\\VC\\Auxiliary\\Build"
     vcvarsall = os.path.join(productdir, "vcvarsall.bat")
-    print(vcvarsall)
     if os.path.isfile(vcvarsall):
         return vcvarsall
-    raise DistutilsPlatformError("Error,Unable to find vcvarsall.bat")
     return None
 
 

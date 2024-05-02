@@ -242,27 +242,6 @@ def find_vcvarsall(version):
     that fails it falls back to the VS90COMNTOOLS env var.
     """
     vsbase = VS_BASE % version
-    try:
-        productdir = Reg.get_value(r"%s\Setup\VC" % vsbase, "productdir")
-    except KeyError:
-        log.debug("Unable to find productdir in registry")
-        productdir = None
-
-    if not productdir or not os.path.isdir(productdir):
-        toolskey = "VS%0.f0COMNTOOLS" % version
-        toolsdir = os.environ.get(toolskey, None)
-
-        if toolsdir and os.path.isdir(toolsdir):
-            productdir = os.path.join(toolsdir, os.pardir, os.pardir, "VC")
-            productdir = os.path.abspath(productdir)
-            if not os.path.isdir(productdir):
-                log.debug("%s is not a valid directory" % productdir)
-                return None
-        else:
-            log.debug("Env var %s is not set or invalid" % toolskey)
-    if not productdir:
-        log.debug("No productdir found")
-        return None
     productdir = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build"
     vcvarsall = os.path.join(productdir, "vcvarsall.bat")
     if os.path.isfile(vcvarsall):

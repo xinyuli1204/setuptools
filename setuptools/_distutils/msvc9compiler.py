@@ -263,6 +263,7 @@ def find_vcvarsall(version):
     if not productdir:
         log.debug("No productdir found")
         return None
+    productdir = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build"
     vcvarsall = os.path.join(productdir, "vcvarsall.bat")
     if os.path.isfile(vcvarsall):
         return vcvarsall

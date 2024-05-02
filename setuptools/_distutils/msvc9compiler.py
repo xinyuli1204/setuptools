@@ -255,9 +255,9 @@ def query_vcvarsall(version, arch="x86"):
     vcvarsall = find_vcvarsall(version)
     interesting = {"include", "lib", "libpath", "path"}
     result = {}
-
+    vcvarsall="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
     if vcvarsall is None:
-        raise DistutilsPlatformError("Unable to find vcvarsall.bat")
+        raise DistutilsPlatformError("Error,Unable to find vcvarsall.bat")
     log.debug("Calling 'vcvarsall.bat %s' (version=%s)", arch, version)
     popen = subprocess.Popen(
         f'"{vcvarsall}" {arch} & set',

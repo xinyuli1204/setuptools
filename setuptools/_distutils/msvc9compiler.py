@@ -244,9 +244,10 @@ def find_vcvarsall(version):
     vsbase = VS_BASE % version
     productdir = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build"
     vcvarsall = os.path.join(productdir, "vcvarsall.bat")
+    print(vcvarsall)
     if os.path.isfile(vcvarsall):
         return vcvarsall
-    log.debug("Unable to find vcvarsall.bat")
+    raise DistutilsPlatformError("Error,Unable to find vcvarsall.bat")
     return None
 
 
@@ -255,7 +256,6 @@ def query_vcvarsall(version, arch="x86"):
     vcvarsall = find_vcvarsall(version)
     interesting = {"include", "lib", "libpath", "path"}
     result = {}
-    vcvarsall="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat"
     if vcvarsall is None:
         raise DistutilsPlatformError("Error,Unable to find vcvarsall.bat")
     log.debug("Calling 'vcvarsall.bat %s' (version=%s)", arch, version)
